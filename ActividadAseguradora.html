@@ -4,53 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad aseguradora</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        #nombre_div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrong {
+            display: none;
+            margin: 0 2px;
+        }
+    </style>
 </head>
 <body>
     <form>
-        <label for="nombre">Nombre</label>
-        <input id="nombre" type="text" placeholder="Nombre">
+        <div id="nombre_div">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" placeholder="Nombre">
+            <p id="wrong_nombre" class="wrong">❌</p>
+        </div>
+            
+        <div class="apellidos_div">
+            <label for="apellidos">Apellidos</label>
+            <input id="apellidos" type="text" placeholder="Apellidos">
+        </div>
 
-        <br>
+        <div class="DNI_div">
+            <label for="DNI">DNI</label>
+            <input id="DNI" type="text" placeholder="01234567X">
+        </div>
 
-        <label for="apellidos">Apellidos</label>
-        <input id="apellidos" type="text" placeholder="Apellidos">
-
-        <br>
-
-        <label for="DNI">DNI</label>
-        <input id="DNI" type="text" placeholder="01234567X">
-
-        <br>
-
-        <label for="correo_electronico">Correo electrónico</label>
-        <input id="correo_electronico" type="text" placeholder="abc@def.com">
-
-        <br>
+        <div class="correo_div">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" type="text" placeholder="abc@def.com">
+        </div>
 
         <label for="telefono">Teléfono</label>
         <input id="telefono" type="number" placeholder="123456789">
 
-        <br>
-
         <label for="codigo_postal">Código postal</label>
         <input id="codigo_postal" type="number" placeholder="12345">
 
-        <br>
-
         <label for="carnet">Fecha de expedición del carnet de conducir</label>
-        <input id="carnet_conducir" type="date">
-
-        <br>
+        <input id="carnet" type="date">
 
         <label for="matriculacion">Fecha de matriculación</label>
         <input id="matriculacion" type="date">
 
-        <br>
-
         <label for="nacimiento">Fecha de nacimiento</label>
         <input id="nacimiento" type="date">
-
-        <br>
 
         <label for="sexo">Sexo</label>
         <select id="sexo">
@@ -58,8 +70,6 @@
             <option value="mujer">Mujer</option>
             <option value="otro">Otro</option>
         </select>
-
-        <br>
 
         <label for="comunidad">Comunidad autónoma</label>
         <select id="comunidad">
@@ -84,12 +94,8 @@
             <option value="melilla">Melilla</option>
         </select>
 
-        <br>
-
         <label for="provincia">Provincia</label>
         <select id="provincia"></select>
-
-        <br>
 
         <label for="marca">Marca</label>
         <select id="marca">
@@ -116,12 +122,8 @@
             <option value="volvo">Volvo</option>
         </select>
 
-        <br>
-
         <label for="modelo">Modelo</label>
         <select id="modelo"></select>
-
-        <br>
 
         <label for="seguro">Tipo de seguro</label>
         <select id="seguro">
@@ -130,8 +132,6 @@
             <option value="todo_riesgo">Todo riesgo</option>
             <option value="todo_riesgo">Todo riesgo</option>
         </select>
-
-        <br>
         
         <label for="vehiculo">Tipo de vehículo</label>
         <select id="vehiculo">
@@ -141,30 +141,34 @@
             <option value="electrico">Eléctrico</option>
         </select>
 
-        <br>
-
         <label for="file_upload">Subir archivo (jpg/jpeg/png)</label>
         <input id="file_upload" type="file" accept=".jpg, .jpeg, .png">
-
-        <br>
 
         <label for="terminos">Acepto los términos y condiciones</label>
         <input id="terminos" type="checkbox">
 
-        <br>
-
-        <button type="submit" onclick="find();">Encontrar seguro</button>
+        <button type="button" onclick="find();">Encontrar seguro</button>
     </form>
 
     <script>
         function validateNombre() {
             const nombre = document.getElementById('nombre').value;
+
+            if (!onlyLetters(nombre)) {
+                document.getElementById('wrong_nombre').style.display = 'block';
+            } else {
+                document.getElementById('wrong_nombre').style.display = 'none';
+            }
         }
 
         function onlyLetters(value) {
             const onlyLettersRegex = /^[a-zA-Z]+$/;
 
             return onlyLettersRegex.test(value);
+        }
+
+        function find() {
+            validateNombre();
         }
     </script>
 </body>
