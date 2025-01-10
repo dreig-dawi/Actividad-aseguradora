@@ -11,6 +11,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            gap: 10px;
         }
 
         div {
@@ -18,6 +19,7 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            gap: 10px;
         }
 
         .wrong {
@@ -30,7 +32,7 @@
     <form>
         <div id="nombre_div">
             <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" placeholder="Nombre">
+            <input id="nombre" type="text" placeholder="Nombre" maxlength="30">
             <p id="wrong_nombre" class="wrong">❌</p>
         </div>
             
@@ -111,7 +113,7 @@
             <select id="provincia"></select>
         </div>
 
-        <marca_modelo_div>
+        <div id="marca_modelo_div">
             <label for="marca">Marca</label>
             <select id="marca">
                 <option value="alfa_romeo">Alfa Romeo</option>
@@ -145,7 +147,7 @@
                 <option value="todo_riesgo">Todo riesgo</option>
                 <option value="todo_riesgo">Todo riesgo</option>
             </select>
-        </marca_modelo_div>
+        </div>
         
         <div id="vehiculo_div">
             <label for="vehiculo">Tipo de vehículo</label>
@@ -173,11 +175,12 @@
     <script>
         function validateNombre() {
             const nombre = document.getElementById('nombre').value;
+            const wrongNombre = document.getElementById('wrong_nombre');
 
-            if (!onlyLetters(nombre)) {
-                document.getElementById('wrong_nombre').style.display = 'block';
+            if (onlyLetters(nombre)) {
+                wrongNombre.style.display = 'none';
             } else {
-                document.getElementById('wrong_nombre').style.display = 'none';
+                wrongNombre.style.display = 'flex';
             }
         }
 
