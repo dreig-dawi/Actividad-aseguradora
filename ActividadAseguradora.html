@@ -175,14 +175,18 @@
 
     <script>
         // Validators
-        function validateNombreApellidos() {
+        function validateNombre() {
             const nombre = document.getElementById("nombre");
-            const apellidos = document.getElementById("apellidos");
             if (nombre.value.length > 30) {
                 checkValid(onlyWords(nombre.value), nombre);
             } else {
                 invalidInput(nombre);
             }
+        }
+
+        function validateApellidos() {
+            const apellidos = document.getElementById("apellidos");
+
             checkValid(onlyWords(apellidos.value), apellidos);
         }
 
@@ -201,6 +205,36 @@
             checkValid(isAdult(nacimiento.value), nacimiento);
         }
 
+        function validateCarnet() {
+            const carnet = document.getElementById("carnet");
+
+            checkValid(isPast(carnet.value), carnet);
+        }
+
+        function validateMatriculacion() {
+            const matriculacion = document.getElementById("matriculacion");
+
+            checkValid(isPast(matriculacion.value), matriculacion);
+        }
+
+        function validateMatricula() {
+            const matricula = document.getElementById("matricula");
+
+            // Regex permite 4 números seguidos de 3 letras
+            const matriculaRegex = /^[0-9]{4}[a-zA-Z]{3}$/;
+
+            checkValid(matriculaRegex.test(matricula.value), matricula);
+        }
+
+        function validateCodigoPostal() {
+            const codigoPostal = document.getElementById("codigo_postal");
+
+            // Regex permite 5 números
+            const codigoPostalRegex = /^[0-9]{5}$/;
+
+            checkValid(codigoPostalRegex.test(codigoPostal.value), codigoPostal);
+        }
+
         // Main
         function find() {
 
@@ -208,6 +242,9 @@
             validateNombreApellidos();
             validateDNI();
             validateNacimiento();
+            validateCarnet();
+            validateMatriculacion();
+            validateMatricula();
         }
 
         // Utils
@@ -223,14 +260,19 @@
             const date = new Date(value);
             const now = new Date();
 
-            // Resta la fecha de nacimiento a la fecha actual
-            const diff = now - date;
-
             // Convierte el resultado a años
-            const age = diff / (1000 * 60 * 60 * 24 * 365.25);
+            const age = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
 
             // Si la edad es mayor o igual a 18, es adulto
             return age >= 18;
+        }
+
+        function isPast(value) {
+            const date = new Date(value);
+            const now = new Date();
+
+            // Si la fecha es anterior a la actual, es válida
+            return date < now;
         }
 
         function checkValid(condition, input) {
