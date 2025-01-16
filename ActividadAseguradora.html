@@ -175,39 +175,62 @@
 
     <script>
         // Validators
-        function validateNombre() {
-            const nombre = document.getElementById('nombre');
-            
-            checkValid(onlyLetters(nombre.value), nombre);
+        function validateNombreApellidos() {
+            const nombre = document.getElementById("nombre");
+            const apellidos = document.getElementById("apellidos");
+            if (nombre.value.length > 30) {
+                checkValid(onlyWords(nombre.value), nombre);
+            } else {
+                invalidInput(nombre);
+            }
+            checkValid(onlyWords(apellidos.value), apellidos);
         }
 
         function validateDNI() {
-            const DNI = document.getElementById('DNI');
+            const DNI = document.getElementById("DNI");
 
             // Regex permite 8 números seguidos de una letra
             const DNIRegex = /^[0-9]{8}[a-zA-Z]$/;
 
             checkValid(DNIRegex.test(DNI.value), DNI);
         }
-
            
+        function validateNacimiento() {
+            const nacimiento = document.getElementById("nacimiento");
+
+            checkValid(isAdult(nacimiento.value), nacimiento);
+        }
 
         // Main
         function find() {
 
             // TODO: Eliminar este test code
-            validateNombre();
-
-            // TODO: Everything valid, remove ❌
+            validateNombreApellidos();
+            validateDNI();
+            validateNacimiento();
         }
 
         // Utils
-        function onlyLetters(value) {
+        function onlyWords(value) {
 
-            // Regex para que solo se permitan letras y acentos
-            const onlyLettersRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙ`äëïöüÄËÏÖÜâêîôûÂÊÎÔÛ]+$/;
+            // Regex para que solo se permitan letras, acentos y espacios
+            const onlyWordsRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙ`äëïöüÄËÏÖÜâêîôûÂÊÎÔÛ\s]+$/;
 
-            return onlyLettersRegex.test(value);
+            return onlyWordsRegex.test(value);
+        }
+
+        function isAdult(value) {
+            const date = new Date(value);
+            const now = new Date();
+
+            // Resta la fecha de nacimiento a la fecha actual
+            const diff = now - date;
+
+            // Convierte el resultado a años
+            const age = diff / (1000 * 60 * 60 * 24 * 365.25);
+
+            // Si la edad es mayor o igual a 18, es adulto
+            return age >= 18;
         }
 
         function checkValid(condition, input) {
@@ -219,19 +242,18 @@
         }
 
         function invalidInput(input) {
-            const wrong = document.createElement('p');
+            const wrong = document.createElement("p");
             wrong.id = "wrong_" + input.id;
             wrong.textContent = '❌';
 
+            // TODO: Que no se creen cruces extra
             // TODO: Añadir mensaje de error al icono
             input.parentNode.appendChild(wrong);
         }
         
         function validInput(input) {
-            try {
-                const wrong = document.getElementById('wrong_' + input.id);
-                wrong.style.display = 'none';
-            } catch (_) {}
+            const wrong = document.getElementById("wrong_" + input.id);
+            wrong.style.display = 'none';
         }
     </script>
 </body>
