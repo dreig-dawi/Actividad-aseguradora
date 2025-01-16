@@ -237,10 +237,22 @@
 
         // Main
         window.onload = function() {
-            setValidators();
+            setProvinciasList();
+            setEvents();
         };
 
+        function find() { 
+            const price = calculateBasePrice();       
+            
+        }
+
         // Event setters
+        function setEvents() {
+            setValidators();
+            setProvinciasList();
+            document.getElementById("comunidad").addEventListener("change", setProvinciasList);
+        }
+
         function setValidators() {
             document.getElementById("nombre").addEventListener("blur", validateNombre);
             document.getElementById("apellidos").addEventListener("blur", validateApellidos);
@@ -251,11 +263,84 @@
             document.getElementById("codigo_postal").addEventListener("blur", validateCodigoPostal);
         }
 
+        function setProvinciasList() {
+            switch (document.getElementById("comunidad").value) {
+                case "andalucia":
+                    setProvincias(["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"]);
+                    break;
+                case "aragon":
+                    setProvincias(["Huesca", "Teruel", "Zaragoza"]);
+                    break;
+                case "asturias":
+                    setProvincias(["Asturias"]);
+                    break;
+                case "baleares":
+                    setProvincias(["Baleares"]);
+                    break;
+                case "canarias":
+                    setProvincias(["Las Palmas", "Santa Cruz de Tenerife"]);
+                    break;
+                case "cantabria":
+                    setProvincias(["Cantabria"]);
+                    break;
+                case "castilla_la_mancha":
+                    setProvincias(["Albacete", "Ciudad Real", "Cuenca", "Guadalajara", "Toledo"]);
+                    break;
+                case "castilla_y_leon":
+                    setProvincias(["Ávila", "Burgos", "León", "Palencia", "Salamanca", "Segovia", "Soria", "Valladolid", "Zamora"]);
+                    break;
+                case "cataluña":
+                    setProvincias(["Barcelona", "Girona", "Lleida", "Tarragona"]);
+                    break;
+                case "comunidad_valenciana":
+                    setProvincias(["Alicante", "Castellón", "Valencia"]);
+                    break;
+                case "extremadura":
+                    setProvincias(["Badajoz", "Cáceres"]);
+                    break;
+                case "galicia":
+                    setProvincias(["A Coruña", "Lugo", "Ourense", "Pontevedra"]);
+                    break;
+                case "madrid":
+                    setProvincias(["Madrid"]);
+                    break;
+                case "murcia":
+                    setProvincias(["Murcia"]);
+                    break;
+                case "navarra":
+                    setProvincias(["Navarra"]);
+                    break;
+                case "pais_vasco":
+                    setProvincias(["Álava", "Gipuzkoa", "Bizkaia"]);
+                    break;
+                case "la_rioja":
+                    setProvincias(["La Rioja"]);
+                    break;
+            }
+        }
+
+        function setProvincias(provinciasList) {
+            const provincias = document.getElementById("provincia");
+
+            // Elimina las provincias anteriores
+            while (provincias.firstChild) {
+                provincias.removeChild(provincias.firstChild);
+            }
+
+            // Añade las nuevas provincias
+            provinciasList.forEach(provincia => {
+                const option = document.createElement("option");
+                option.value = provincia;
+                option.textContent = provincia;
+                provincias.appendChild(option);
+            });
+        }
+
         // Utils
         function onlyWords(value) {
 
             // Regex para que solo se permitan letras, acentos y espacios
-            const onlyWordsRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙ`äëïöüÄËÏÖÜâêîôûÂÊÎÔÛ\s]+$/;
+            const onlyWordsRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙäëïöüÄËÏÖÜâêîôûÂÊÎÔÛ\s]+$/;
 
             return onlyWordsRegex.test(value);
         }
@@ -300,6 +385,19 @@
         function validInput(input) {
             const wrong = document.getElementById("wrong_" + input.id);
             wrong.style.display = 'none';
+        }
+
+        function calculateBasePrice() {
+            switch (document.getElementById("seguro").value) {
+                case "terceros":
+                    return 100;
+                case "terceros_ampliado":
+                    return 200;
+                case "todo_riesgo":
+                    return 300;
+                default:
+                    return 0;
+            };
         }
     </script>
 </body>
