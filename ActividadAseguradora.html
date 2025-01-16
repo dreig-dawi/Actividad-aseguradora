@@ -32,8 +32,9 @@
     <form>
         <div id="nombre_div">
             <label for="nombre">Nombre</label>
-            <input id="nombre" type="text" placeholder="Nombre" maxlength="30">
-            <p id="wrong_nombre" class="wrong">❌</p>
+
+            <!-- Limita el campo a 30 caracteres -->
+            <input id="nombre" type="text"  placeholder="Nombre" maxlength="30">
         </div>
             
         <div id="apellidos_div">
@@ -173,25 +174,64 @@
     </form>
 
     <script>
+        // Validators
         function validateNombre() {
-            const nombre = document.getElementById('nombre').value;
-            const wrongNombre = document.getElementById('wrong_nombre');
-
-            if (onlyLetters(nombre)) {
-                wrongNombre.style.display = 'none';
-            } else {
-                wrongNombre.style.display = 'flex';
-            }
+            const nombre = document.getElementById('nombre');
+            
+            checkValid(onlyLetters(nombre.value), nombre);
         }
 
+        function validateDNI() {
+            const DNI = document.getElementById('DNI');
+
+            // Regex permite 8 números seguidos de una letra
+            const DNIRegex = /^[0-9]{8}[a-zA-Z]$/;
+
+            checkValid(DNIRegex.test(DNI.value), DNI);
+        }
+
+           
+
+        // Main
+        function find() {
+
+            // TODO: Eliminar este test code
+            validateNombre();
+
+            // TODO: Everything valid, remove ❌
+        }
+
+        // Utils
         function onlyLetters(value) {
-            const onlyLettersRegex = /^[a-zA-Z]+$/;
+
+            // Regex para que solo se permitan letras y acentos
+            const onlyLettersRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑàèìòùÀÈÌÒÙ`äëïöüÄËÏÖÜâêîôûÂÊÎÔÛ]+$/;
 
             return onlyLettersRegex.test(value);
         }
 
-        function find() {
-            validateNombre();
+        function checkValid(condition, input) {
+            if (condition) {
+                validInput(input);
+            } else {
+                invalidInput(input);
+            }
+        }
+
+        function invalidInput(input) {
+            const wrong = document.createElement('p');
+            wrong.id = "wrong_" + input.id;
+            wrong.textContent = '❌';
+
+            // TODO: Añadir mensaje de error al icono
+            input.parentNode.appendChild(wrong);
+        }
+        
+        function validInput(input) {
+            try {
+                const wrong = document.getElementById('wrong_' + input.id);
+                wrong.style.display = 'none';
+            } catch (_) {}
         }
     </script>
 </body>
