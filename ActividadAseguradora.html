@@ -244,6 +244,24 @@
             checkValid(archivo.value.endsWith(".jpg"), archivo);
         }
 
+        function validateCorreo() {
+            const correo = document.getElementById("correo");
+
+            // Regex permite cualquier caracter seguido de @ seguido de cualquier caracter seguido de .
+            const correoRegex = /.+@.+\..+/;
+
+            checkValid(correoRegex.test(correo.value), correo);
+        }
+
+        function validateTelefono() {
+            const telefono = document.getElementById("telefono");
+
+            // Regex permite 9 números
+            const telefonoRegex = /^[0-9]{9}$/;
+
+            checkValid(telefonoRegex.test(telefono.value), telefono);
+        }
+
         // Main
         window.onload = function() {
             setProvinciasList();
@@ -266,6 +284,10 @@
             document.getElementById("matriculacion").addEventListener("input", validateMatriculacion);
             document.getElementById("codigo_postal").addEventListener("blur", validateCodigoPostal);
             document.getElementById("archivo").addEventListener("change", validateArchivo);
+
+            // Validaciones extra
+            document.getElementById("correo").addEventListener("blur", validateCorreo);
+            document.getElementById("telefono").addEventListener("blur", validateTelefono);
         }
 
         function setProvinciasList() {
