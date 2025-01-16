@@ -145,7 +145,7 @@
             <select id="seguro">
                 <option value="terceros">Terceros</option>
                 <option value="terceros_ampliado">Terceros ampliado</option>
-                <option value="todo_riesgo">Todo riesgo</option>
+                <option value="franquicia">Con franquicia</option>
                 <option value="todo_riesgo">Todo riesgo</option>
             </select>
         </div>
@@ -240,11 +240,6 @@
             setProvinciasList();
             setEvents();
         };
-
-        function find() { 
-            const price = calculateBasePrice();       
-            
-        }
 
         // Event setters
         function setEvents() {
@@ -390,14 +385,63 @@
         function calculateBasePrice() {
             switch (document.getElementById("seguro").value) {
                 case "terceros":
-                    return 100;
+                    return 500;
                 case "terceros_ampliado":
-                    return 200;
+                    return 650;
+                case "franquicia":
+                    return 750;
                 case "todo_riesgo":
-                    return 300;
-                default:
-                    return 0;
+                    return 1000;
             };
+        }
+
+        function isOldAdult() {
+            const nacimiento = document.getElementById("nacimiento");
+
+            const date = new Date(nacimiento.value);
+            const now = new Date();
+
+            // Convierte el resultado a años
+            const age = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
+
+            // Si la edad es mayor o igual a 25, es adulto
+            return age >= 25;
+        }
+
+        function isNewDriver() {
+            const carnet = document.getElementById("carnet");
+
+            const date = new Date(carnet.value);
+            const now = new Date();
+
+            // Convierte el resultado a años
+            const age = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
+
+            // Si la edad es menor o igual a 2, es nuevo conductor
+            return age <= 5;
+        }
+
+        function vehiculoTypePriceModifier(price) {
+            switch (document.getElementById("vehiculo").value) {
+                case "diesel":
+                    return price * 1.2;
+                case "gasolina":
+                    return price * 1.15;
+                case "hibrido":
+                    return price * 1.05;
+                case "electrico":
+                    return price;
+            }
+        }
+
+        function priceCalculator() { 
+            const price = calculateBasePrice();       
+            
+            price = isOldAdult() ? price : price * 1.1;
+
+            price = isNewDriver() ? price * 1.1 : price;
+
+            price = vehiculoTypePriceModifier(price);
         }
     </script>
 </body>
