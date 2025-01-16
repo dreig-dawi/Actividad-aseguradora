@@ -488,11 +488,15 @@
         }
 
         function invalidInput(input) {
+            if (document.getElementById("wrong_" + input.id)) {
+                return;
+            }
+
             const wrong = document.createElement("p");
             wrong.id = "wrong_" + input.id;
             wrong.textContent = '❌';
+            wrong.title = invalidTitle(input);
 
-            // TODO: Que no se creen cruces extra
             // TODO: Añadir mensaje de error al icono
             input.parentNode.appendChild(wrong);
         }
@@ -500,6 +504,31 @@
         function validInput(input) {
             const wrong = document.getElementById("wrong_" + input.id);
             wrong.style.display = 'none';
+        }
+
+        function invalidTitle(input) {
+            switch (input.id) {
+                case "nombre":
+                    return "El nombre solo puede contener letras, acentos y espacios";
+                case "apellidos":
+                    return "Los apellidos solo pueden contener letras, acentos y espacios";
+                case "DNI":
+                    return "El DNI debe contener 8 números seguidos de una letra";
+                case "nacimiento":
+                    return "La fecha de nacimiento debe ser anterior a la actual";
+                case "carnet":
+                    return "La fecha de expedición del carnet debe ser anterior a la actual";
+                case "matriculacion":
+                    return "La fecha de matriculación debe ser anterior a la actual";
+                case "codigo_postal":
+                    return "El código postal debe contener 5 números";
+                case "archivo":
+                    return "El archivo debe ser de tipo jpg";
+                case "correo":
+                    return "El correo debe contener al menos un caracter, seguido de @, seguido de al menos un caracter, seguido de .";
+                case "telefono":
+                    return "El teléfono debe contener 9 números";
+            }
         }
 
         function calculateBasePrice() {
