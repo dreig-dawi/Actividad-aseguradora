@@ -276,6 +276,8 @@
 
             document.getElementById("comunidad").addEventListener("change", setProvinciasList);
             document.getElementById("marca").addEventListener("change", setModelosList);
+            
+            setDragFileEvent();
         }
 
         function setValidators() {
@@ -432,6 +434,19 @@
                     setModelos(["240", "340", "360", "440", "460", "480", "740", "760", "780", "850", "940", "960", "C30", "C70", "S40", "S60", "S70", "S80", "S90", "V40", "V50", "V60", "V70", "V90", "XC40", "XC60", "XC70", "XC90"]);
                     break;
             }
+        }
+
+        function setDragFileEvent() {
+            document.addEventListener("dragover", event => event.preventDefault());
+            document.addEventListener("drop", loadDroppedFile);
+        }
+
+        function loadDroppedFile(event) {
+            event.preventDefault();
+
+            const archivo = document.getElementById("archivo");
+            archivo.files = event.dataTransfer.files[0];
+            validateArchivo();
         }
 
         function setModelos(modelosList) {
