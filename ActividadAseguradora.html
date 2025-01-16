@@ -240,8 +240,8 @@
         function validateArchivo() {
             const archivo = document.getElementById("archivo");
 
-            // Comprueba que el archivo sea una imagen
-            checkValid(archivo.files[0].type.includes(".jpg"), archivo);
+            // Comprueba que el archivo sea de tipo jpg
+            checkValid(archivo.value.endsWith(".jpg"), archivo);
         }
 
         // Main
