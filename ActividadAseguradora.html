@@ -272,7 +272,10 @@
         function setEvents() {
             setValidators();
             setProvinciasList();
+            setModelosList();
+
             document.getElementById("comunidad").addEventListener("change", setProvinciasList);
+            document.getElementById("marca").addEventListener("change", setModelosList);
         }
 
         function setValidators() {
@@ -360,6 +363,91 @@
                 option.value = provincia;
                 option.textContent = provincia;
                 provincias.appendChild(option);
+            });
+        }
+
+        function setModelosList() {
+            switch (document.getElementById("marca").value) {
+                case "alfa_romeo":
+                    setModelos(["Giulia", "Stelvio"]);
+                    break;
+                case "audi":
+                    setModelos(["A1", "A3", "A4", "A5", "A6", "A7", "A8", "Q2", "Q3", "Q5", "Q7", "Q8", "TT"]);
+                    break;
+                case "bmw":
+                    setModelos(["Serie 1", "Serie 2", "Serie 3", "Serie 4", "Serie 5", "Serie 6", "Serie 7", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "Z4"]);
+                    break;
+                case "citroen":
+                    setModelos(["C1", "C3", "C4", "C5", "C6", "C8", "C-Crosser", "C-Elysée", "C-Zero", "DS3", "DS4", "DS5", "Jumper", "Jumpy", "Nemo", "Saxo", "Xantia", "XM", "Xsara", "Xsara Picasso", "ZX"]);
+                    break;
+                case "fiat":
+                    setModelos(["500", "500L", "500X", "Bravo", "Croma", "Doblo", "Ducato", "Fiorino", "Freemont", "Fullback", "Grande Punto", "Idea", "Linea", "Marea", "Multipla", "Palio", "Panda", "Punto", "Qubo", "Scudo", "Sedici", "Seicento", "Stilo", "Talento", "Tipo", "Ulysse"]);
+                    break;
+                case "ford":
+                    setModelos(["B-Max", "C-Max", "EcoSport", "Edge", "Escort", "Explorer", "Fiesta", "Focus", "Fusion", "Galaxy", "Ka", "Kuga", "Mondeo", "Mustang", "Puma", "Ranger", "S-Max", "Tourneo", "Transit"]);
+                    break;
+                case "honda":
+                    setModelos(["Accord", "Civic", "CR-V", "CR-Z", "FR-V", "HR-V", "Insight", "Jazz", "Legend", "NSX", "Prelude"]);
+                    break;
+                case "hyundai":
+                    setModelos(["Accent", "Atos", "Coupe", "Elantra", "Getz", "Grand Santa Fe", "H-1", "i10", "i20", "i30", "i40", "i800", "ix20", "ix35", "ix55", "Kona", "Matrix", "Santa Fe", "Sonata", "Terracan", "Trajet", "Tucson", "Veloster"]);
+                    break;
+                case "kia":
+                    setModelos(["Carens", "Carnival", "Ceed", "Cerato", "Clarus", "Joice", "Magentis", "Niro", "Opirus", "Optima", "Picanto", "Pregio", "Pride", "Pro Ceed", "Rio", "Seltos", "Sephia", "Shuma", "Sorento", "Soul", "Sportage", "Stinger", "Stonic", "Venga", "Xceed"]);
+                    break;
+                case "mazda":
+                    setModelos(["121", "2", "3", "323", "5", "6", "626", "929", "B2500", "BT-50", "CX-3", "CX-30", "CX-5", "CX-7", "CX-9", "Demio", "MPV", "MX-3", "MX-5", "MX-6", "Premacy", "RX-7", "RX-8", "Tribute", "Xedos 6", "Xedos 9"]);
+                    break;
+                case "mercedes":
+                    setModelos(["A", "B", "C", "CL", "CLA", "CLC", "CLK", "CLS", "E", "G", "GL", "GLA", "GLB", "GLC", "GLE", "GLK", "GLS", "M", "R", "S", "SL", "SLC", "SLK", "SLR", "SLS", "V", "Vaneo", "Viano", "Vito", "X", "Z"]);
+                    break;
+                case "mini":
+                    setModelos(["Cabrio", "Clubman", "Countryman", "Coupe", "One", "Paceman", "Roadster"]);
+                    break;
+                case "nissan":
+                    setModelos(["350Z", "370Z", "Almera", "Cabstar", "Cube", "GT-R", "Juke", "Leaf", "Maxima", "Micra", "Murano", "Navara", "Note", "NP300", "NV200", "Pathfinder", "Patrol", "Pickup", "Pixo", "Primastar", "Primera", "Pulsar", "Qashqai", "Serena", "Sunny", "Terrano", "Tiida", "Vanette", "X-Trail"]);
+                    break;
+                case "opel":
+                    setModelos(["Adam", "Agila", "Ampera", "Antara", "Astra", "Calibra", "Campo", "Cascada", "Combo", "Corsa", "Crossland X", "Frontera", "Grandland X", "Insignia", "Kadett", "Karl", "Manta", "Meriva", "Mokka", "Monterey", "Monza", "Movano", "Omega", "Rekord", "Senator", "Signum", "Sintra", "Speedster", "Tigra", "Vectra", "Vivaro", "Zafira"]);
+                    break;
+                case "peugeot":
+                    setModelos(["1007", "106", "107", "108", "2008", "205", "206", "207", "208", "3008", "301", "305", "306", "307", "308", "309", "4007", "4008", "405", "406", "407", "5008", "504", "505", "508", "604", "605", "607", "806", "807", "Bipper", "Boxer", "Expert", "iOn", "Partner", "RCZ", "Rifter", "Traveller"]);
+                    break;
+                case "renault":
+                    setModelos(["4", "5", "6", "9", "11", "12", "14", "15", "16", "17", "18", "19", "20", "21", "25", "30", "Avantime", "Captur", "Clio", "Espace", "Express", "Fluence", "Fuego", "Grand Espace", "Grand Modus", "Grand Scenic", "Kadjar", "Kangoo", "Koleos", "Laguna", "Latitude", "Mascott", "Master", "Megane", "Modus", "Safrane", "Scenic", "Sport Spider", "Super 5", "Talisman", "Thalia", "Trafic", "Twingo", "Twizy", "Vel Satis", "Wind", "Zoe"]);
+                    break;
+                case "seat":
+                    setModelos(["Alhambra", "Altea", "Arona", "Ateca", "Cordoba", "Exeo", "Ibiza", "Leon", "Mii", "Tarraco", "Toledo"]);
+                    break;
+                case "skoda":
+                    setModelos(["Citigo", "Fabia", "Kamiq", "Karoq", "Kodiaq", "Octavia", "Rapid", "Roomster", "Scala", "Superb", "Yeti"]);
+                    break;
+                case "toyota":
+                    setModelos(["4Runner", "Auris", "Avensis", "Aygo", "C-HR", "Camry", "Carina", "Celica", "Corolla", "Corona", "Cressida", "Crown", "Dyna", "GT86", "Hiace", "Highlander", "Hilux", "iQ", "Land Cruiser", "MR2", "Paseo", "Picnic", "Previa", "Prius", "Proace", "RAV4", "Sequoia", "Sienna", "Starlet", "Supra", "Tercel", "Urban Cruiser", "Verso", "Yaris"]);
+                    break;
+                case "volkswagen":
+                    setModelos(["Arteon", "Beetle", "Bora", "Caddy", "California", "Caravelle", "CC", "Corrado", "Crafter", "Eos", "Fox", "Golf", "Jetta", "Lupo", "Multivan", "Passat", "Phaeton", "Polo", "Scirocco", "Sharan", "T-Cross", "T-Roc", "Tiguan", "Touareg", "Touran", "Transporter", "Up", "Vento"]);
+                    break;
+                case "volvo":
+                    setModelos(["240", "340", "360", "440", "460", "480", "740", "760", "780", "850", "940", "960", "C30", "C70", "S40", "S60", "S70", "S80", "S90", "V40", "V50", "V60", "V70", "V90", "XC40", "XC60", "XC70", "XC90"]);
+                    break;
+            }
+        }
+
+        function setModelos(modelosList) {
+            const modelos = document.getElementById("modelo");
+
+            // Elimina los modelos anteriores
+            while (modelos.firstChild) {
+                modelos.removeChild(modelos.firstChild);
+            }
+
+            // Añade los nuevos modelos
+            modelosList.forEach(modelo => {
+                const option = document.createElement("option");
+                option.value = modelo;
+                option.textContent = modelo;
+                modelos.appendChild(option);
             });
         }
 
