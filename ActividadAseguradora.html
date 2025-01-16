@@ -502,8 +502,10 @@
         }
         
         function validInput(input) {
-            const wrong = document.getElementById("wrong_" + input.id);
-            wrong.style.display = 'none';
+            try {
+                const wrong = document.getElementById("wrong_" + input.id);
+                wrong.remove();
+            } catch (_) {}
         }
 
         function invalidTitle(input) {
