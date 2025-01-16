@@ -160,9 +160,11 @@
             </select>
         </div>
 
-        <div id="file_div">
-            <label for="file">Subir archivo (jpg/jpeg/png)</label>
-            <input id="file" type="file" accept=".jpg, .jpeg, .png">
+        <div id="archivo_div">
+            <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
+
+            <!-- Limita el tipo de archivo a jpg -->
+            <input id="archivo" type="file" accept=".jpg">
         </div>
 
         <div id="terminos_div">
@@ -233,6 +235,13 @@
             const codigoPostalRegex = /^[0-9]{5}$/;
 
             checkValid(codigoPostalRegex.test(codigoPostal.value), codigoPostal);
+        }
+
+        function validateArchivo() {
+            const archivo = document.getElementById("archivo");
+
+            // Comprueba que el archivo sea una imagen
+            checkValid(archivo.files[0].type.includes(".jpg"), archivo);
         }
 
         // Main
