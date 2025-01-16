@@ -177,7 +177,7 @@
         // Validators
         function validateNombre() {
             const nombre = document.getElementById("nombre");
-            if (nombre.value.length > 30) {
+            if (nombre.value.length < 30) {
                 checkValid(onlyWords(nombre.value), nombre);
             } else {
                 invalidInput(nombre);
@@ -236,15 +236,19 @@
         }
 
         // Main
-        function find() {
+        window.onload = function() {
+            setValidators();
+        };
 
-            // TODO: Eliminar este test code
-            validateNombreApellidos();
-            validateDNI();
-            validateNacimiento();
-            validateCarnet();
-            validateMatriculacion();
-            validateMatricula();
+        // Event setters
+        function setValidators() {
+            document.getElementById("nombre").addEventListener("blur", validateNombre);
+            document.getElementById("apellidos").addEventListener("blur", validateApellidos);
+            document.getElementById("DNI").addEventListener("blur", validateDNI);
+            document.getElementById("nacimiento").addEventListener("input", validateNacimiento);
+            document.getElementById("carnet").addEventListener("input", validateCarnet);
+            document.getElementById("matriculacion").addEventListener("input", validateMatriculacion);
+            document.getElementById("codigo_postal").addEventListener("blur", validateCodigoPostal);
         }
 
         // Utils
