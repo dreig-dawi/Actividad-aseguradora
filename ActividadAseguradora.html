@@ -36,7 +36,7 @@
         }
 
         .card {
-            border: 1px solid #ccc;
+            border: 1px solid sandybrown;
             border-radius: 10px;
             padding: 20px;
             width: 200px;
@@ -58,18 +58,18 @@
 
         .card h3 {
             font-size: 1.2em;
-            color: #007BFF;
+            color: blue;
             margin-bottom: 10px;
         }
 
         .card p {
             font-size: 1em;
-            color: #555;
+            color: black;
         }
 
         input[type="text"], input[type="number"], input[type="date"], input[type="file"], select {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid sandybrown;
             border-radius: 5px;
             width: 100%;
             box-sizing: border-box;
@@ -83,14 +83,10 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: #007BFF;
+            background-color: blue;
             color: white;
             cursor: pointer;
             transition: background-color 0.2s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
         }
 
         label {
@@ -105,156 +101,142 @@
     </style>
 </head>
 <body>
-    <form>
-        <div id="nombre_div">
-            <label for="nombre">Nombre</label>
-
-            <!-- Limita el campo a 30 caracteres -->
-            <input id="nombre" type="text"  placeholder="Nombre" maxlength="30">
-        </div>
-            
-        <div id="apellidos_div">
-            <label for="apellidos">Apellidos</label>
-            <input id="apellidos" type="text" placeholder="Apellidos">
-        </div>
-
-        <div id="DNI_div">
-            <label for="DNI">DNI</label>
-            <input id="DNI" type="text" placeholder="01234567X">
-        </div>
-
-        <div id="correo_div">
-            <label for="correo">Correo electrónico</label>
-            <input id="correo" type="text" placeholder="abc@def.com">
-        </div>
-
-        <div id="telefono_div">
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" type="number" placeholder="123456789">
-        </div>
-
-        <div id="codigo_postal_div">
-            <label for="codigo_postal">Código postal</label>
-            <input id="codigo_postal" type="number" placeholder="12345">
-        </div>
-
-        <div id="carnet_div">
-            <label for="carnet">Fecha de expedición del carnet de conducir</label>
-            <input id="carnet" type="date">
-        </div>
-
-        <div id="matriculacion_div">
-            <label for="matriculacion">Fecha de matriculación</label>
-            <input id="matriculacion" type="date">
-        </div>
-
-        <div id="matricula_div">
-            <label for="matricula">Matrícula</label>
-            <input id="matricula" type="text" placeholder="1234ABC">
-        </div>
-
-        <div id="nacimiento_div">
-            <label for="nacimiento">Fecha de nacimiento</label>
-            <input id="nacimiento" type="date">
-        </div>
-
-        <div id="sexo_div">
-            <label for="sexo">Sexo</label>
-            <select id="sexo">
-                <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>
-                <option value="otro">Otro</option>
-            </select>
-        </div>
-
-        <div id="comunidad_provincia_div">
-            <label for="comunidad">Comunidad autónoma</label>
-            <select id="comunidad">
-                <option value="andalucia">Andalucía</option>
-                <option value="aragon">Aragón</option>
-                <option value="asturias">Asturias</option>
-                <option value="baleares">Baleares</option>
-                <option value="canarias">Canarias</option>
-                <option value="cantabria">Cantabria</option>
-                <option value="castilla_la_mancha">Castilla-La Mancha</option>
-                <option value="castilla_y_leon">Castilla y León</option>
-                <option value="cataluña">Cataluña</option>
-                <option value="comunidad_valenciana">Comunidad Valenciana</option>
-                <option value="extremadura">Extremadura</option>
-                <option value="galicia">Galicia</option>
-                <option value="madrid">Madrid</option>
-                <option value="murcia">Murcia</option>
-                <option value="navarra">Navarra</option>
-                <option value="pais_vasco">País Vasco</option>
-                <option value="la_rioja">La Rioja</option>
-                <option value="ceuta">Ceuta</option>
-                <option value="melilla">Melilla</option>
-            </select>
-            
-            <label for="provincia">Provincia</label>
-            <select id="provincia"></select>
-        </div>
-
-        <div id="marca_modelo_div">
-            <label for="marca">Marca</label>
-            <select id="marca">
-                <option value="alfa_romeo">Alfa Romeo</option>
-                <option value="audi">Audi</option>
-                <option value="bmw">BMW</option>
-                <option value="citroen">Citroën</option>
-                <option value="fiat">Fiat</option>
-                <option value="ford">Ford</option>
-                <option value="honda">Honda</option>
-                <option value="hyundai">Hyundai</option>
-                <option value="kia">Kia</option>
-                <option value="mazda">Mazda</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="mini">Mini</option>
-                <option value="nissan">Nissan</option>
-                <option value="opel">Opel</option>
-                <option value="peugeot">Peugeot</option>
-                <option value="renault">Renault</option>
-                <option value="seat">Seat</option>
-                <option value="skoda">Skoda</option>
-                <option value="toyota">Toyota</option>
-                <option value="volkswagen">Volkswagen</option>
-                <option value="volvo">Volvo</option>
-            </select>
-            <label for="modelo">Modelo</label>
-            <select id="modelo"></select>
-            <label for="seguro">Tipo de seguro</label>
-            <select id="seguro">
-                <option value="terceros">Terceros</option>
-                <option value="terceros_ampliado">Terceros ampliado</option>
-                <option value="franquicia">Con franquicia</option>
-                <option value="todo_riesgo">Todo riesgo</option>
-            </select>
-        </div>
+    <div id="main">
+        <form>
+            <div id="nombre_div">
+                <label for="nombre">Nombre</label>
+                <!-- Limita el campo a 30 caracteres -->
+                <input id="nombre" type="text"  placeholder="Nombre" maxlength="30">
+            </div>
         
-        <div id="vehiculo_div">
-            <label for="vehiculo">Tipo de vehículo</label>
-            <select id="vehiculo">
-                <option value="diesel">Diesel</option>
-                <option value="gasolina">Gasolina</option>
-                <option value="hibrido">Híbrido</option>
-                <option value="electrico">Eléctrico</option>
-            </select>
-        </div>
-
-        <div id="archivo_div">
-            <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
-
-            <!-- Limita el tipo de archivo a jpg -->
-            <input id="archivo" type="file" accept=".jpg .jpeg .png">
-        </div>
-
-        <div id="terminos_div">
-            <label for="terminos">Acepto los términos y condiciones</label>
-            <input id="terminos" type="checkbox">
-        </div>
-
-        <button type="button" onclick="find();">Encontrar seguro</button>
-    </form>
+            <div id="apellidos_div">
+                <label for="apellidos">Apellidos</label>
+                <input id="apellidos" type="text" placeholder="Apellidos">
+            </div>
+            <div id="DNI_div">
+                <label for="DNI">DNI</label>
+                <input id="DNI" type="text" placeholder="01234567X">
+            </div>
+            <div id="correo_div">
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" type="text" placeholder="abc@def.com">
+            </div>
+            <div id="telefono_div">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" type="number" placeholder="123456789">
+            </div>
+            <div id="codigo_postal_div">
+                <label for="codigo_postal">Código postal</label>
+                <input id="codigo_postal" type="number" placeholder="12345">
+            </div>
+            <div id="carnet_div">
+                <label for="carnet">Fecha de expedición del carnet de conducir</label>
+                <input id="carnet" type="date">
+            </div>
+            <div id="matriculacion_div">
+                <label for="matriculacion">Fecha de matriculación</label>
+                <input id="matriculacion" type="date">
+            </div>
+            <div id="matricula_div">
+                <label for="matricula">Matrícula</label>
+                <input id="matricula" type="text" placeholder="1234ABC">
+            </div>
+            <div id="nacimiento_div">
+                <label for="nacimiento">Fecha de nacimiento</label>
+                <input id="nacimiento" type="date">
+            </div>
+            <div id="sexo_div">
+                <label for="sexo">Sexo</label>
+                <select id="sexo">
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div id="comunidad_provincia_div">
+                <label for="comunidad">Comunidad autónoma</label>
+                <select id="comunidad">
+                    <option value="andalucia">Andalucía</option>
+                    <option value="aragon">Aragón</option>
+                    <option value="asturias">Asturias</option>
+                    <option value="baleares">Baleares</option>
+                    <option value="canarias">Canarias</option>
+                    <option value="cantabria">Cantabria</option>
+                    <option value="castilla_la_mancha">Castilla-La Mancha</option>
+                    <option value="castilla_y_leon">Castilla y León</option>
+                    <option value="cataluña">Cataluña</option>
+                    <option value="comunidad_valenciana">Comunidad Valenciana</option>
+                    <option value="extremadura">Extremadura</option>
+                    <option value="galicia">Galicia</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="murcia">Murcia</option>
+                    <option value="navarra">Navarra</option>
+                    <option value="pais_vasco">País Vasco</option>
+                    <option value="la_rioja">La Rioja</option>
+                    <option value="ceuta">Ceuta</option>
+                    <option value="melilla">Melilla</option>
+                </select>
+        
+                <label for="provincia">Provincia</label>
+                <select id="provincia"></select>
+            </div>
+            <div id="marca_modelo_div">
+                <label for="marca">Marca</label>
+                <select id="marca">
+                    <option value="alfa_romeo">Alfa Romeo</option>
+                    <option value="audi">Audi</option>
+                    <option value="bmw">BMW</option>
+                    <option value="citroen">Citroën</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="ford">Ford</option>
+                    <option value="honda">Honda</option>
+                    <option value="hyundai">Hyundai</option>
+                    <option value="kia">Kia</option>
+                    <option value="mazda">Mazda</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="mini">Mini</option>
+                    <option value="nissan">Nissan</option>
+                    <option value="opel">Opel</option>
+                    <option value="peugeot">Peugeot</option>
+                    <option value="renault">Renault</option>
+                    <option value="seat">Seat</option>
+                    <option value="skoda">Skoda</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="volkswagen">Volkswagen</option>
+                    <option value="volvo">Volvo</option>
+                </select>
+                <label for="modelo">Modelo</label>
+                <select id="modelo"></select>
+                <label for="seguro">Tipo de seguro</label>
+                <select id="seguro">
+                    <option value="terceros">Terceros</option>
+                    <option value="terceros_ampliado">Terceros ampliado</option>
+                    <option value="franquicia">Con franquicia</option>
+                    <option value="todo_riesgo">Todo riesgo</option>
+                </select>
+            </div>
+        
+            <div id="vehiculo_div">
+                <label for="vehiculo">Tipo de vehículo</label>
+                <select id="vehiculo">
+                    <option value="diesel">Diesel</option>
+                    <option value="gasolina">Gasolina</option>
+                    <option value="hibrido">Híbrido</option>
+                    <option value="electrico">Eléctrico</option>
+                </select>
+            </div>
+            <div id="archivo_div">
+                <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
+                <!-- Limita el tipo de archivo a jpg -->
+                <input id="archivo" type="file" accept=".jpg .jpeg .png">
+            </div>
+            <div id="terminos_div">
+                <label for="terminos">Acepto los términos y condiciones</label>
+                <input id="terminos" type="checkbox">
+            </div>
+            <button type="button" onclick="find();">Encontrar seguro</button>
+        </form>
+    </div>
 
     <script>
         // Validators
@@ -348,56 +330,6 @@
             const terminos = document.getElementById("terminos");
 
             return checkValid(terminos.checked, terminos);
-        }
-
-        // Main
-        window.onload = function() {
-            setEvents();
-        };
-
-        function find() {
-            const terminos = document.getElementById("terminos");
-
-            if (everythingValid()) {
-                showOffers()
-            }
-        }
-
-        function showOffers() {
-            const segurosList = getSegurosList();
-
-            var cards = document.createElement("div");
-            cards.classList.add("cards");
-
-            segurosList.forEach ( function (seguro) {
-                    var card = document.createElement("div");
-                    card.classList.add("card");
-                    card.innerHTML = "<h2>" + seguro.name + "</h2>";
-                    card.innerHTML += "<h3>" + seguro.price + "€</h3>";
-                    card.innerHTML += "<p>" + seguro.type + "</p>";
-
-                    cards.appendChild(card);
-                }
-            )
-            
-            document.body.appendChild(cards);
-        }
-
-        function everythingValid() {
-            return (
-                validateNombre() &&
-                validateApellidos() &&
-                validateDNI() &&
-                validateCorreo() &&
-                validateTelefono() &&
-                validateCodigoPostal() &&
-                validateCarnet() &&
-                validateMatriculacion() &&
-                validateNacimiento() &&
-                validateMatricula() &&
-                validateArchivo() &&
-                validateTerminos()
-            )
         }
 
         // Event setters
@@ -749,29 +681,129 @@
         }
 
         function getSegurosList() {
+            const seguroTipo = document.getElementById("seguro").value;
+
             return [
                 {
                     name: "Seguro para pobres",
                     price: priceCalculator(500),
                     type: "Seguro a terceros",
+                    chosen: seguroTipo === "terceros",
+                    id: "low"
                 },
                 {
                     name: "Seguro menos pobre",
                     price: priceCalculator(650),
-                    type: "Seguro a terceros ampliado"
+                    type: "Seguro a terceros ampliado",
+                    chosen: seguroTipo === "terceros_ampliado",
+                    id: "low_plus"
                 },
                 {
-                    name: "Seguro menos menos pobre",
+                    name: "Seguro básico",
                     price: priceCalculator(750),
-                    type: "Seguro con franquicia"
+                    type: "Seguro con franquicia",
+                    chosen: seguroTipo === "franquicia",
+                    id: "medium"
                 },
                 {
                     name: "Seguro para ricos",
                     price: priceCalculator(1000),
-                    type: "Seguro a todo riesgo"
+                    type: "Seguro a todo riesgo",
+                    chosen: seguroTipo === "todo_riesgo",
+                    id: "high"
                 }
             ];
         }
+
+        function contratar() {
+            alert("Gracias por contratar.  Atentamente tu asesor de seguros Darío Reig Buades");
+        }
+
+        function descartar(seguroId) {
+            const card = document.getElementById(seguroId);
+
+            card.style.display = "none";
+        }
+
+        // Main
+        window.onload = function() {
+            setEvents();
+        };
+
+        function find() {
+            const terminos = document.getElementById("terminos");
+
+            if (everythingValid()) {
+                showOffers()
+            }
+        }
+
+        function showOffers() {
+
+            const segurosList = getSegurosList();
+
+            var cards = document.createElement("div");
+            cards.classList.add("cards");
+
+            segurosList.forEach ( function (seguro) {
+                    var card = document.createElement("div");
+                    card.id = seguro.id;
+                    card.classList.add("card");
+                    card.innerHTML = "<h2>" + seguro.name + "</h2>";
+                    card.innerHTML += "<h3>" + seguro.price + "€</h3>";
+                    card.innerHTML += "<p>" + seguro.type + "</p>";
+                    
+                    if (seguro.chosen) {
+                        card.style.backgroundColor = "green";
+                    }
+                    
+                    var contratarButton = document.createElement("button");
+                    contratarButton.textContent = "Contratar";
+                    contratarButton.onclick = function () { 
+                        contratar() 
+                    };
+                    contratarButton.addEventListener("mouseover", function() {
+                        contratarButton.style.backgroundColor = "yellow";
+                        contratarButton.style.transform = "scale(1.1)";
+                    });
+                    contratarButton.addEventListener("mouseout", function() {
+                        contratarButton.style.backgroundColor = "blue";
+                        contratarButton.style.transform = "scale(1)";
+                    });
+
+                    var descartarButton = document.createElement("button");
+                    descartarButton.textContent = "Descartar";
+                    descartarButton.onclick = function() {
+                        descartar(seguro.id) 
+                    };
+
+                    card.appendChild(contratarButton);
+                    card.appendChild(descartarButton);
+                    cards.appendChild(card); 
+                }
+            )
+            
+            document.getElementById("main").appendChild(cards);
+        }
+
+        function everythingValid() {
+            return (
+                validateNombre() &&
+                validateApellidos() &&
+                validateDNI() &&
+                validateCorreo() &&
+                validateTelefono() &&
+                validateCodigoPostal() &&
+                validateCarnet() &&
+                validateMatriculacion() &&
+                validateNacimiento() &&
+                validateMatricula() &&
+                validateArchivo() &&
+                validateTerminos()
+            )
+        }
+
+
     </script>
 </body>
 </html>
