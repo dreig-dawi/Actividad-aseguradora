@@ -234,6 +234,7 @@
                 <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
                 <!-- Limita el tipo de archivo a jpg jpeg y png-->
                 <input id="archivo" type="file" accept=".jpg,.jpeg,.png">
+                <img id="archivo_previsualizacion"></img>
             </div>
             <div id="terminos_div">
                 <label for="terminos">Acepto los términos y condiciones</label>
@@ -310,7 +311,18 @@
             const archivo = document.getElementById("archivo");
 
             // Comprueba que el archivo sea de tipo jpg
-            return checkValid(archivo.value.endsWith(".jpg"), archivo);
+            if (checkValid(archivo.value.endsWith(".jpg"), archivo)) {
+                const archivoPrevisualizacion = document.getElementById("archivo_previsualizacion");
+                const file = archivo.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    archivoPrevisualizacion.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+                return true;
+            } else {
+                return false;
+            }
         }
 
         function validateCorreo() {
@@ -513,7 +525,6 @@
         }
 
         function loadDroppedFile(event) {
-            // TODO: Previsualizar la imagen
             event.preventDefault();
 
             const archivo = document.getElementById("archivo");
@@ -586,7 +597,6 @@
             wrong.textContent = '❌';
             wrong.title = invalidTitle(input);
 
-            // TODO: Añadir mensaje de error al icono
             input.parentNode.appendChild(wrong);
         }
         
@@ -722,6 +732,8 @@
 
         function contratar() {
             alert("Gracias por contratar.  Atentamente tu asesor de seguros Darío Reig Buades");
+
+            location.reload();
         }
 
         function descartar(seguroId) {
