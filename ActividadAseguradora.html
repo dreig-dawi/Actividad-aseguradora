@@ -445,7 +445,7 @@
             event.preventDefault();
 
             const archivo = document.getElementById("archivo");
-            archivo.files = event.dataTransfer.files[0];
+            archivo.files = event.dataTransfer.files;
             validateArchivo();
         }
 
