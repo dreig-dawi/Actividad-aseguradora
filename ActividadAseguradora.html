@@ -72,6 +72,11 @@
             <input id="matriculacion" type="date">
         </div>
 
+        <div id="matricula_div">
+            <label for="matricula">Matrícula</label>
+            <input id="matricula" type="text" placeholder="1234ABC">
+        </div>
+
         <div id="nacimiento_div">
             <label for="nacimiento">Fecha de nacimiento</label>
             <input id="nacimiento" type="date">
@@ -180,16 +185,17 @@
         function validateNombre() {
             const nombre = document.getElementById("nombre");
             if (nombre.value.length < 30) {
-                checkValid(onlyWords(nombre.value), nombre);
+                return checkValid(onlyWords(nombre.value), nombre);
             } else {
                 invalidInput(nombre);
+                return false;
             }
         }
 
         function validateApellidos() {
             const apellidos = document.getElementById("apellidos");
 
-            checkValid(onlyWords(apellidos.value), apellidos);
+            return checkValid(onlyWords(apellidos.value), apellidos);
         }
 
         function validateDNI() {
@@ -198,25 +204,25 @@
             // Regex permite 8 números seguidos de una letra
             const DNIRegex = /^[0-9]{8}[a-zA-Z]$/;
 
-            checkValid(DNIRegex.test(DNI.value), DNI);
+            return checkValid(DNIRegex.test(DNI.value), DNI);
         }
            
         function validateNacimiento() {
             const nacimiento = document.getElementById("nacimiento");
 
-            checkValid(isAdult(nacimiento.value), nacimiento);
+            return checkValid(isAdult(nacimiento.value), nacimiento);
         }
 
         function validateCarnet() {
             const carnet = document.getElementById("carnet");
 
-            checkValid(isPast(carnet.value), carnet);
+            return checkValid(isPast(carnet.value), carnet);
         }
 
         function validateMatriculacion() {
             const matriculacion = document.getElementById("matriculacion");
 
-            checkValid(isPast(matriculacion.value), matriculacion);
+            return checkValid(isPast(matriculacion.value), matriculacion);
         }
 
         function validateMatricula() {
@@ -225,7 +231,7 @@
             // Regex permite 4 números seguidos de 3 letras
             const matriculaRegex = /^[0-9]{4}[a-zA-Z]{3}$/;
 
-            checkValid(matriculaRegex.test(matricula.value), matricula);
+            return checkValid(matriculaRegex.test(matricula.value), matricula);
         }
 
         function validateCodigoPostal() {
@@ -234,14 +240,14 @@
             // Regex permite 5 números
             const codigoPostalRegex = /^[0-9]{5}$/;
 
-            checkValid(codigoPostalRegex.test(codigoPostal.value), codigoPostal);
+            return checkValid(codigoPostalRegex.test(codigoPostal.value), codigoPostal);
         }
 
         function validateArchivo() {
             const archivo = document.getElementById("archivo");
 
             // Comprueba que el archivo sea de tipo jpg
-            checkValid(archivo.value.endsWith(".jpg"), archivo);
+            return checkValid(archivo.value.endsWith(".jpg"), archivo);
         }
 
         function validateCorreo() {
@@ -250,7 +256,7 @@
             // Regex permite cualquier caracter seguido de @ seguido de cualquier caracter seguido de .
             const correoRegex = /.+@.+\..+/;
 
-            checkValid(correoRegex.test(correo.value), correo);
+            return checkValid(correoRegex.test(correo.value), correo);
         }
 
         function validateTelefono() {
@@ -259,14 +265,57 @@
             // Regex permite 9 números
             const telefonoRegex = /^[0-9]{9}$/;
 
-            checkValid(telefonoRegex.test(telefono.value), telefono);
+            return checkValid(telefonoRegex.test(telefono.value), telefono);
         }
 
         // Main
         window.onload = function() {
-            setProvinciasList();
             setEvents();
         };
+
+        function find() {
+            const terminos = document.getElementById("terminos");
+
+            if (terminos.checked && everythingValid()) {
+                showOffers()
+            } else {
+                invalidInput(terminos);
+            }
+        }
+
+        function showOffers() {
+            const segurosList = getSegurosList();
+
+            var cards = document.createElement("div");
+
+            segurosList.forEach ( function (seguro) {
+                    var card = document.createElement("div");
+                    card.innerHTML = "<h2>" + seguro.name + "</h2>";
+                    card.innerHTML += "<h3>" + seguro.price + "€</h3>";
+                    card.innerHTML += "<p>" + seguro.type + "</p>";
+
+                    cards.appendChild(card);
+                }
+            )
+            
+            document.body.appendChild(cards);
+        }
+
+        function everythingValid() {
+            return (
+                validateNombre() &&
+                validateApellidos() &&
+                validateDNI() &&
+                validateCorreo() &&
+                validateTelefono() &&
+                validateCodigoPostal() &&
+                validateCarnet() &&
+                validateMatriculacion() &&
+                validateNacimiento() &&
+                validateMatricula() &&
+                validateArchivo()
+            )
+        }
 
         // Event setters
         function setEvents() {
@@ -287,6 +336,7 @@
             document.getElementById("nacimiento").addEventListener("input", validateNacimiento);
             document.getElementById("carnet").addEventListener("input", validateCarnet);
             document.getElementById("matriculacion").addEventListener("input", validateMatriculacion);
+            document.getElementById("matricula").addEventListener("blur", validateMatricula);
             document.getElementById("codigo_postal").addEventListener("blur", validateCodigoPostal);
             document.getElementById("archivo").addEventListener("change", validateArchivo);
 
@@ -442,6 +492,7 @@
         }
 
         function loadDroppedFile(event) {
+            // TODO: Previsualizar la imagen
             event.preventDefault();
 
             const archivo = document.getElementById("archivo");
@@ -497,8 +548,10 @@
         function checkValid(condition, input) {
             if (condition) {
                 validInput(input);
+                return true;
             } else {
                 invalidInput(input);
+                return false;
             }
         }
 
@@ -548,19 +601,6 @@
             }
         }
 
-        function calculateBasePrice() {
-            switch (document.getElementById("seguro").value) {
-                case "terceros":
-                    return 500;
-                case "terceros_ampliado":
-                    return 650;
-                case "franquicia":
-                    return 750;
-                case "todo_riesgo":
-                    return 1000;
-            };
-        }
-
         function isOldAdult() {
             const nacimiento = document.getElementById("nacimiento");
 
@@ -600,14 +640,53 @@
             }
         }
 
-        function priceCalculator() { 
-            const price = calculateBasePrice();       
-            
+        function matriculacionPriceModifier(price) {
+            const matriculacion = document.getElementById("matriculacion");
+
+            const date = new Date(matriculacion.value);
+            const now = new Date();
+
+            // Convierte el resultado a años
+            const age = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
+
+            return age > 10 ? price * (1 + (age - 10) / 100) : price;
+        }
+
+        function priceCalculator(price) { 
             price = isOldAdult() ? price : price * 1.1;
 
             price = isNewDriver() ? price * 1.1 : price;
 
             price = vehiculoTypePriceModifier(price);
+
+            price = matriculacionPriceModifier(price);
+
+            return price;
+        }
+
+        function getSegurosList() {
+            return [
+                {
+                    name: "Seguro para pobres",
+                    price: priceCalculator(500),
+                    type: "Seguro a terceros",
+                },
+                {
+                    name: "Seguro menos pobre",
+                    price: priceCalculator(650),
+                    type: "Seguro a terceros ampliado"
+                },
+                {
+                    name: "Seguro menos menos pobre",
+                    price: priceCalculator(750),
+                    type: "Seguro con franquicia"
+                },
+                {
+                    name: "Seguro para ricos",
+                    price: priceCalculator(1000),
+                    type: "Seguro a todo riesgo"
+                }
+            ];
         }
     </script>
 </body>
