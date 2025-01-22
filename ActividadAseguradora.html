@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividad aseguradora</title>
     <style>
+        #main {
+            display: flex;
+            flex-direction: column;
+        }
+
         form {
             display: flex;
             flex-direction: column;
@@ -227,8 +232,8 @@
             </div>
             <div id="archivo_div">
                 <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
-                <!-- Limita el tipo de archivo a jpg -->
-                <input id="archivo" type="file" accept=".jpg .jpeg .png">
+                <!-- Limita el tipo de archivo a jpg jpeg y png-->
+                <input id="archivo" type="file" accept=".jpg,.jpeg,.png">
             </div>
             <div id="terminos_div">
                 <label for="terminos">Acepto los términos y condiciones</label>
