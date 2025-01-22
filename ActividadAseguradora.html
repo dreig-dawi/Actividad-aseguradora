@@ -234,8 +234,8 @@
                 <label for="archivo">Subir archivo (jpg/jpeg/png)</label>
                 <!-- Limita el tipo de archivo a jpg jpeg y png-->
                 <input id="archivo" type="file" accept=".jpg,.jpeg,.png">
-                <img id="archivo_previsualizacion"></img>
             </div>
+            <img id="archivo_previsualizacion"></img>
             <div id="terminos_div">
                 <label for="terminos">Acepto los términos y condiciones</label>
                 <input id="terminos" type="checkbox">
@@ -573,8 +573,8 @@
             const date = new Date(value);
             const now = new Date();
 
-            // Si la fecha es anterior a la actual, es válida
-            return date < now;
+            // Si la fecha es anterior o igual a la actual, es válida
+            return date <= now;
         }
 
         function checkValid(condition, input) {
@@ -616,11 +616,11 @@
                 case "DNI":
                     return "El DNI debe contener 8 números seguidos de una letra";
                 case "nacimiento":
-                    return "La fecha de nacimiento debe ser anterior a la actual";
+                    return "La fecha de nacimiento debe corresponder a una mayoría de edad";
                 case "carnet":
-                    return "La fecha de expedición del carnet debe ser anterior a la actual";
+                    return "La fecha de expedición del carnet debe ser anterior o igual a la actual";
                 case "matriculacion":
-                    return "La fecha de matriculación debe ser anterior a la actual";
+                    return "La fecha de matriculación debe ser anterior o igual a la actual";
                 case "codigo_postal":
                     return "El código postal debe contener 5 números";
                 case "archivo":
@@ -629,6 +629,10 @@
                     return "El correo debe contener al menos un caracter, seguido de @, seguido de al menos un caracter, seguido de .";
                 case "telefono":
                     return "El teléfono debe contener 9 números";
+                case "terminos":
+                    return "Debes aceptar los términos y condiciones";
+                case "matricula":
+                    return "La matrícula debe contener 4 números seguidos de 3 letras";
             }
         }
 
@@ -692,7 +696,7 @@
 
             price = matriculacionPriceModifier(price);
 
-            return price;
+            return price.toFixed(2);
         }
 
         function getSegurosList() {
@@ -813,6 +817,7 @@
                 validateCodigoPostal() &&
                 validateCarnet() &&
                 validateMatriculacion() &&
+                validateMatricula() &&
                 validateNacimiento() &&
                 validateMatricula() &&
                 validateArchivo() &&
