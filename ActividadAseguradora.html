@@ -317,6 +317,8 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     archivoPrevisualizacion.src = e.target.result;
+                    archivoPrevisualizacion.style.maxWidth = "300px";
+                    archivoPrevisualizacion.style.maxHeight = "300px";
                 };
                 reader.readAsDataURL(file);
                 return true;
@@ -662,20 +664,20 @@
             return age <= 5;
         }
 
-        function vehiculoTypePriceModifier(price) {
+        function vehiculoTypePriceModifier(modificadorPrecio) {
             switch (document.getElementById("vehiculo").value) {
                 case "diesel":
-                    return price * 1.2;
+                    return modificadorPrecio + 20;
                 case "gasolina":
-                    return price * 1.15;
+                    return modificadorPrecio + 15;
                 case "hibrido":
-                    return price * 1.05;
+                    return price + 5;
                 case "electrico":
-                    return price;
+                    return modificadorPrecio;
             }
         }
 
-        function matriculacionPriceModifier(price) {
+        function matriculacionPriceModifier(modificadorPrecio) {
             const matriculacion = document.getElementById("matriculacion");
 
             const date = new Date(matriculacion.value);
@@ -684,19 +686,19 @@
             // Convierte el resultado a años
             const age = (now - date) / (1000 * 60 * 60 * 24 * 365.25);
 
-            return age > 10 ? price * (1 + (age - 10) / 100) : price;
+            return age > 10 ? modificadorPrecio + (age - 10) : modificadorPrecio;
         }
 
         function priceCalculator(price) { 
-            price = isOldAdult() ? price : price * 1.1;
+            let modificadorPrecio = isOldAdult() ? 0 : 10;
 
-            price = isNewDriver() ? price * 1.1 : price;
+            modificadorPrecio = isNewDriver() ? modificadorPrecio + 10 : modificadorPrecio;
 
-            price = vehiculoTypePriceModifier(price);
+            modificadorPrecio = vehiculoTypePriceModifier(modificadorPrecio);
 
-            price = matriculacionPriceModifier(price);
+            modificadorPrecio = matriculacionPriceModifier(modificadorPrecio);
 
-            return price.toFixed(2);
+            return ((1 + (modificadorPrecio / 100)) * price).toFixed(2);
         }
 
         function getSegurosList() {
@@ -704,28 +706,28 @@
 
             return [
                 {
-                    name: "Seguro para pobres",
+                    name: "Seguro a terceros ",
                     price: priceCalculator(500),
                     type: "Seguro a terceros",
                     chosen: seguroTipo === "terceros",
                     id: "low"
                 },
                 {
-                    name: "Seguro menos pobre",
+                    name: "Seguro a terceros ampliado",
                     price: priceCalculator(650),
                     type: "Seguro a terceros ampliado",
                     chosen: seguroTipo === "terceros_ampliado",
                     id: "low_plus"
                 },
                 {
-                    name: "Seguro básico",
+                    name: "Seguro con franquicia",
                     price: priceCalculator(750),
                     type: "Seguro con franquicia",
                     chosen: seguroTipo === "franquicia",
                     id: "medium"
                 },
                 {
-                    name: "Seguro para ricos",
+                    name: "Seguro a todo riesgo",
                     price: priceCalculator(1000),
                     type: "Seguro a todo riesgo",
                     chosen: seguroTipo === "todo_riesgo",
@@ -751,11 +753,15 @@
             setEvents();
         };
 
+        var fin = false;
         function find() {
-            const terminos = document.getElementById("terminos");
+            if (!fin) {
+                const terminos = document.getElementById("terminos");
 
-            if (everythingValid()) {
-                showOffers()
+                if (everythingValid()) {
+                    showOffers()
+                    fin = true;
+                }
             }
         }
 
